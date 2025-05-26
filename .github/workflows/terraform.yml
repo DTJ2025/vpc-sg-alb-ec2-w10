@@ -1,0 +1,19 @@
+name: Terraform code pipeline
+
+on: 
+push: ['main']
+pull_requests: ['main']
+
+
+jobs: 
+  init: 
+    runs_on: ubuntu-latest
+    steps:
+    - name: checkout code
+      uses: action/checkout
+    - name: Setup Terraform with specified version on the runner
+       uses:  hashicorp/setup-terraform@v2
+       with:
+         terraform_version: 1.3.0  
+    - name: initialize
+      run: terraform init
